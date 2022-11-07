@@ -7,48 +7,19 @@ import SubmitButton from "../../../../components/SubmitButton";
 import { FormContext } from "../../../../context/Form-context";
 import { produceHTML } from "../../../../utils/produceHTML";
 import validateForm from "../../../../utils/validateFormFields";
+import FormBody from "./components/FormBody";
 
 function MyForm() {
   //write code here
-  //todo: change email subject
-  const EMAIL_SUBJECT = "Request 7 month free ads";
-  const { formValues } = useContext(FormContext);
-  //TODO: get right keys
-  const { email } = formValues;
-  const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const EMAIL_SUBJECT = "Free registration confirmation";
+  const { formValues, errors, setErrors } = useContext(FormContext);
+  const { email, logo, productPhotos, bannerPhoto } = formValues;
 
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const msg = {
-      to: email,
-      bcc: [
-        {
-          email: "pro@hepsisize.net",
-          name: "dev mail",
-        },
-        {
-          email: "ads@hepsisize.net",
-          name: "management",
-        },
-      ],
-      from: {
-        email: "ads@hepsisize.net",
-        name: "Hepsisize",
-      },
-      subject: `${EMAIL_SUBJECT} (Received✅)`,
-      html: produceHTML(formValues),
-    };
-    //TODO: put the POST endpoint in the env file
-    const url = process.env.REACT_APP_SEND_EMAIL;
-    const headers = {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify(msg),
-    };
-
     //TODO: Modify the validate function
     const ErrorsArray = validateForm(formValues);
     const isErrors = ErrorsArray.length > 0;
@@ -58,6 +29,39 @@ function MyForm() {
       return;
     }
 
+    const msg = {
+      to: email,
+      bcc: [
+        {
+          email: "pro@hepsisize.net",
+          name: "dev mail",
+        },
+        {
+          email: "ads@hepsisize.net",
+          name: "Hepsisize",
+        },
+      ],
+      from: {
+        email: "ads@hepsisize.net",
+        name: "Hepsisize",
+      },
+      attachments: [...logo, ...bannerPhoto, ...productPhotos],
+      subject: `${EMAIL_SUBJECT} (Received✅)`,
+      html: produceHTML(formValues),
+    };
+
+    //TODO: put the POST endpoint in the env file
+    const url = process.env.REACT_APP_SEND_EMAIL_SERVER_ENDPOINT;
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        //TODO: modify server api key in the env file
+        api: process.env.REACT_APP_SEND_EMAIL_SERVER_API,
+      },
+      method: "POST",
+      body: JSON.stringify(msg),
+    };
+
     try {
       setIsLoading(true);
       setErrors([]);
@@ -65,21 +69,24 @@ function MyForm() {
       const res = await fetch(url, headers);
       const data = await res.json();
 
-      if (!data.success) throw new Error(`(${res.status}): ${data.result}`);
+      if (!data.ok) throw new Error(`(${res.status}): ${data.msg}`);
       navigate("/success-submission");
     } catch (error) {
       console.error(error.message);
       setErrors([error.message]);
+      window.scrollTo(0, 0);
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <Paper sx={{ p: 5, borderRadius: 10, my: 7 }}>
+    <Paper sx={{ p: { xs: 2, md: 5 }, borderRadius: "10px", my: 7 }}>
       <RenderErrors errors={errors} />
 
       <form onSubmit={handleSubmit}>
+        {/* TODO: Render the form content here */}
+        <FormBody />
         {/* TODO: Render the form content here */}
 
         <SubmitButton />
