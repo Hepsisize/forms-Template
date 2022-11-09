@@ -13,6 +13,7 @@ function MyForm() {
   //write code here
   const EMAIL_SUBJECT = "Free registration confirmation";
   const { formValues, errors, setErrors } = useContext(FormContext);
+  // TODO: set the right form values.
   const { email, logo, productPhotos, bannerPhoto } = formValues;
 
   const [isLoading, setIsLoading] = useState(false);

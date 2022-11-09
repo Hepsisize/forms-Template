@@ -1,18 +1,19 @@
-import { createContext, useReducer } from "react";
-import formValuesReducer, {
-  initFormValues,
-} from "../reducers/formValuesReducer";
+import { createContext, useEffect, useReducer, useState } from "react";
+import reducer, { initFormValues } from "../reducers/formValuesReducer";
 
 export const FormContext = createContext();
 export const FormContextProvider = ({ children }) => {
-  const [formValues, dispatchFormInfo] = useReducer(
-    formValuesReducer,
-    initFormValues
-  );
+  const [errors, setErrors] = useState([]);
+  const [formValues, dispatchFormInfo] = useReducer(reducer, initFormValues);
 
+  useEffect(() => {
+    console.log(formValues);
+  }, [formValues]);
   const sharedValues = {
-    setFormInfo: dispatchFormInfo,
+    errors,
+    setErrors,
     formValues,
+    setFormInfo: dispatchFormInfo,
   };
 
   return (

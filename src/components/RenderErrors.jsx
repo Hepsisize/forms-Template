@@ -1,7 +1,7 @@
 import { Alert } from "@mui/material";
 import React from "react";
 
-function RenderErrors({ errors }) {
+function RenderErrors({ errors = [] }) {
   //write code here
 
   return (
