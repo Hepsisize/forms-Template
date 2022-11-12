@@ -1,136 +1,165 @@
-import { format } from "date-fns";
-export function produceHTML(info) {
-  const { agree, email, name, mobile, whoDesign, firstAd, secondAd, thirdAd } =
-    info;
+export function produceHTML(formValues) {
   const {
-    start: start1stAd,
-    to: to1stAd,
-    sendPhotosNow: sendPhotosNow1stAd,
-    sendDesignDate: sendDesignDate1stAd,
-  } = firstAd;
-  const {
-    start: start2ndAd,
-    to: to2ndAd,
-    sendPhotosNow: sendPhotosNow2ndAd,
-    sendDesignDate: sendDesignDate2ndAd,
-  } = secondAd;
-  const {
-    start: start3rdAd,
-    to: to3rdAd,
-    sendPhotosNow: sendPhotosNow3rdAd,
-    sendDesignDate: sendDesignDate3rdAd,
-  } = thirdAd;
-  return `<html><style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-axmw{font-size:18px;font-weight:bold;text-align:center;vertical-align:middle}
-.tg .tg-cey4{border-color:inherit;font-size:16px;text-align:left;vertical-align:top}
-.tg .tg-x5q1{font-size:16px;text-align:left;vertical-align:top}
-.tg .tg-bn4o{font-size:18px;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-y0nj{background-color:#f8a102;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-im5s{background-color:#ffcb2f;font-weight:bold;text-align:left;vertical-align:top}
-</style>
-<table class="tg" style="undefined;table-layout: fixed; width: 681px">
-<colgroup>
-<col style="width: 232px">
-<col style="width: 449px">
-</colgroup>
-<tbody>
-  <tr>
-    <td class="tg-y0nj" colspan="2">free 7 months ads - Hepsisize.net</td>
-  </tr>
-  <tr>
-    <td class="tg-cey4">Name</td>
-    <td class="tg-im5s">${name}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Email</td>
-    <td class="tg-im5s">${email}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">GSM</td>
-    <td class="tg-im5s">${mobile}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Who will design</td>
-    <td class="tg-im5s">${whoDesign}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Agree terms</td>
-    <td class="tg-im5s">${agree ? "agreed" : "disagreed"}</td>
-  </tr>
-  <tr>
-    <td class="tg-axmw" colspan="2">First Ad</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Publish between</td>
-    <td class="tg-im5s">${
-      start1stAd ? format(start1stAd, "dd-MM-yyyy") : "-"
-    }</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">And</td>
-    <td class="tg-im5s">${to1stAd ? format(to1stAd, "dd-MM-yyyy") : "-"}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">How I will send photos</td>
-    <td class="tg-im5s">${sendPhotosNow1stAd || "-"}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Send design before</td>
-    <td class="tg-im5s">${
-      sendDesignDate1stAd ? format(sendDesignDate1stAd, "dd-MM-yyyy") : "-"
-    }</td>
-  </tr>
-  <tr>
-    <td class="tg-bn4o" colspan="2">Second Ad</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Publish between</td>
-    <td class="tg-im5s">${
-      start2ndAd ? format(start2ndAd, "dd-MM-yyyy") : "-"
-    }</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">And</td>
-    <td class="tg-im5s">${to2ndAd ? format(to2ndAd, "dd-MM-yyyy") : "-"}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">How I will send photos</td>
-    <td class="tg-im5s">${sendPhotosNow2ndAd || "-"}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Send design before</td>
-    <td class="tg-im5s">${
-      sendDesignDate2ndAd ? format(sendDesignDate2ndAd, "dd-MM-yyyy") : "-"
-    }</td>
-  </tr>
-  <tr>
-    <td class="tg-bn4o" colspan="2">Third App</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Publish between</td>
-    <td class="tg-im5s">${
-      start3rdAd ? format(start3rdAd, "dd-MM-yyyy") : "-"
-    }</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">And</td>
-    <td class="tg-im5s">${to3rdAd ? format(to3rdAd, "dd-MM-yyyy") : "-"}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">How I will send photos</td>
-    <td class="tg-im5s">${sendPhotosNow3rdAd || "-"}</td>
-  </tr>
-  <tr>
-    <td class="tg-x5q1">Send design before</td>
-    <td class="tg-im5s">${
-      sendDesignDate3rdAd ? format(sendDesignDate3rdAd, "dd-MM-yyyy") : "-"
-    }</td>
-  </tr>
-</tbody>
-</table></html>`;
+    name,
+    address,
+    country,
+    province,
+    GSM,
+    telephone,
+    email,
+    lifeStore,
+    willSell,
+    website,
+    facebook,
+    instagram,
+    twitter,
+    businessField,
+    jobTypes,
+  } = formValues;
+
+  function joinArray2BTxt(arrayOfTexts) {
+    const text = arrayOfTexts.join(", ");
+    return text;
+  }
+  return `<html>
+  <head>
+    <style>
+      table {
+        margin: 10px auto;
+      }
+      .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      .tg td {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+      }
+      .tg th {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+      }
+      .tg .tg-ip1c {
+        background-color: #ffcb2f;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: top;
+      }
+      .tg .tg-k250 {
+        background-color: #ffce93;
+        border-color: inherit;
+        color: #343434;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 18px;
+        text-align: left;
+        vertical-align: top;
+      }
+      .tg .tg-oviw {
+        background-color: #f8a102;
+        border-color: inherit;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: top;
+      }
+      .tg .tg-g7sr {
+        background-color: #ffcb2f;
+        border-color: inherit;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: top;
+      }
+      .tg .tg-begf {
+        background-color: #ffce93;
+        color: #343434;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 18px;
+        text-align: left;
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="tg" style="undefined;table-layout: fixed; width: 828px">
+      <colgroup>
+        <col style="width: 297px" />
+        <col style="width: 531px" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="tg-oviw" colspan="2">Summary of free registration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-k250">Name</td>
+          <td class="tg-g7sr">${name}</td>
+        </tr>
+        <tr>
+          <td class="tg-k250">Address</td>
+          <td class="tg-g7sr">${address} ${province} ${country}</td>
+        </tr>
+        <tr>
+          <td class="tg-begf">Telephone</td>
+          <td class="tg-ip1c">${telephone || "-"}</td>
+        </tr>
+        <tr>
+          <td class="tg-begf">GSM</td>
+          <td class="tg-ip1c">${GSM}</td>
+        </tr>
+        <tr>
+          <td class="tg-begf">Email</td>
+          <td class="tg-ip1c">${email}</td>
+        </tr>
+        <tr>
+          <td class="tg-k250">Life store name</td>
+          <td class="tg-g7sr">${lifeStore || "-"}</td>
+        </tr>
+        <tr>
+          <td class="tg-begf">Products example</td>
+          <td class="tg-ip1c">${willSell || "-"}</td>
+        </tr>
+        <tr>
+        <td class="tg-begf">Website</td>
+        <td class="tg-ip1c">${website || "-"}</td>
+        </tr>
+        <tr>
+        <td class="tg-begf">Facebook URL</td>
+        <td class="tg-ip1c">${facebook || "-"}</td>
+        </tr>
+        <tr>
+        <td class="tg-begf">Instagram URL</td>
+        <td class="tg-ip1c">${instagram || "-"}</td>
+        </tr>
+        <tr>
+        <td class="tg-begf">Twitter URL</td>
+        <td class="tg-ip1c">${twitter || "-"}</td>
+        </tr>
+        <tr>
+        <td class="tg-begf">Business field</td>
+        <td class="tg-ip1c">${businessField}</td>
+        </tr>
+        <tr>
+        <td class="tg-begf">Job type/s</td>
+        <td class="tg-ip1c">${joinArray2BTxt(jobTypes)}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+`;
 }

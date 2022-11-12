@@ -13,8 +13,8 @@ function FormBody() {
         <BasicFields />
         <SelectOneOrMore
           required
-          keyName="jobTypes"
-          label="Select job type/s"
+          keyName="checkbox options"
+          label="checkbox"
           options={{
             Export: false,
             Import: false,
@@ -27,7 +27,28 @@ function FormBody() {
             "Service provider": false,
             Distributor: false,
             "Non-profit organization": false,
+            Other: false,
           }}
+        />
+        <SelectOneOrMore
+          required
+          isRadio
+          keyName="radio options"
+          label="Radio"
+          options={[
+            "Export",
+            "Import",
+            "Wholesaler",
+            "Retailer",
+            "Manufacturer",
+            "Producer",
+            "Freelancer",
+            "Agency",
+            "Service provider",
+            "Distributor",
+            "Non-profit organization",
+            "Other",
+          ]}
         />
         <UploadPhotos
           title="test"

@@ -1,22 +1,52 @@
 function validateForm(formVales) {
   const errorsArray = [];
   // validate the form values
-  const { name, tel, GSM, jobTypes } = formVales;
+  const {
+    name,
+    address,
+    country,
+    province,
+    GSM,
+    telephone,
+    email,
+    businessField,
+    jobTypes,
+  } = formVales;
+
+  //todo: set required fields
+  if (
+    !name ||
+    !address ||
+    !country ||
+    !province ||
+    !GSM ||
+    !email ||
+    !businessField ||
+    !jobTypes.length
+  )
+    errorsArray.push("Should complete all required fields with * mark");
 
   if (!validName(name))
     errorsArray.push("Name Should be at least name & surname");
 
-  if (tel && !validPhone(tel))
+  if (!validAddress(address))
+    errorsArray.push("address should contain building number");
+
+  if (telephone && !validPhone(telephone))
     errorsArray.push(
       "Telephone should start with '+', county code and valid number"
     );
   if (!validPhone(GSM))
     errorsArray.push("GSM should start with '+', county code and valid number");
 
-  if (jobTypes.length === 0)
-    errorsArray.push("At least 1 job type should be selected");
-
   return errorsArray;
+}
+
+//^ validation functions
+function validAddress(address) {
+  const isValid = address.split("").some(character => !isNaN(character));
+
+  return isValid;
 }
 
 function validName(name) {
